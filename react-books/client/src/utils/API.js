@@ -1,6 +1,15 @@
 import axios from "axios";
 
+const key = process.env.KEY;
+const q = query;
+// partial response used for performance
+
 export default {
+  searchBooks: function() {
+    return axios.get(
+      "https://www.googleapis.com/books/v1/volumes?q=" + q + "&printType=books&key=" + key + 
+      "&fields=items(selfLink,volumeInfo(title,authors,description,imageLinks(thumbnail)))");
+  },
   // Gets all books
   getBooks: function() {
     return axios.get("/api/books");
