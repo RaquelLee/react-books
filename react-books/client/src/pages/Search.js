@@ -22,7 +22,7 @@ function Search() {
       API.getGoogleBooks(
         bookTitle.title)
         .then(res =>
-          setBooks([...books, res.data])
+          setBooks(res.data.items)
           ).then(console.log(books))
         .catch(err => console.log(err));
     }
@@ -30,7 +30,8 @@ function Search() {
 
   function setBookState(e) {
     const { id, value } = e.target;
-    setSavedBook({ ...savedBook, [id]: value })
+    setSavedBook({...savedBook, [id]: value })
+    console.log(savedBook)
       .then(API.getOneGoogleBook(savedBook.id)
         .then(res => setSavedBook(res.data))
         .then(handleSave())
@@ -71,18 +72,25 @@ function Search() {
             <List>
               {books.map(book => (
                 <ListItem key={book.id}>
-                  <Link to={book.link}>
-                    <strong>
-                      View {book.title} by
-                      {book.authors}
-                    </strong>
-                  </Link>
-                  <img src={book.image}
-                    alt={book.title}></img>
-                  <button
-                    id={book.id}
-                    onClick={setBookState}
-                  />
+                  {book.id ? (
+ <Link to={book.selfLink}>
+ <strong>
+   View {book.volumeInfo.title} by
+   {book.volumeInfo.authors}
+ </strong>
+</Link>
+                  ) : <p>no link</p>}
+                 {book.volumeInfo.imageLinks.thumbnail ? (
+ <img src={book.volumeInfo.imageLinks.thumbnail}
+ alt={book.volumeInfo.title}></img>
+                  ) : <p>no image</p>}
+                   {book.id ? (
+ <button
+ id={book.id}
+ onClick={setBookState}
+/>
+                  ) : <p>no id</p>}
+                  
                 </ListItem>
               ))}
             </List>

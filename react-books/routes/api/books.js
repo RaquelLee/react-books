@@ -4,6 +4,9 @@ const booksController = require("../../controllers/booksController");
 router.route("/googleBooks/:bookTitle")
   .get(booksController.getGoogleBooks)
 
+  router.route("/googleBooks/:bookID")
+  .get(booksController.getOneGoogleBook)
+
 // Matches with "/api/books"
 router.route("/")
   .get(booksController.findAll)

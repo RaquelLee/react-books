@@ -9,7 +9,7 @@ module.exports = {
       console.log("req.params.bookTitle: ", req.params.bookTitle)
       fetch("https://www.googleapis.com/books/v1/volumes?q=title:"
       + req.params.bookTitle + "&printType=books&key=" + apikey +
-      "&fields=items(selfLink,volumeInfo(title,authors,description,imageLinks(thumbnail)))")
+      "&fields=items(selfLink,id,volumeInfo(title,authors,description,imageLinks(thumbnail)))")
       .then(response => {
         return response.json()
       }).then(data => {
@@ -17,6 +17,20 @@ module.exports = {
       }).catch(err => {
         res.json(err)
       });
+  },
+  getOneGoogleBook: function (req, res) {
+    console.log("req: ", req)
+    console.log("req.params.bookTitle: ", req.params.bookID)
+    fetch("https://www.googleapis.com/books/v1/volumes?q=id:"
+    + req.params.bookID + "&printType=books&key=" + apikey +
+    "&fields=items(selfLink,id,volumeInfo(title,authors,description,imageLinks(thumbnail)))")
+    .then(response => {
+      return response.json()
+    }).then(data => {
+      res.json(data)
+    }).catch(err => {
+      res.json(err)
+    });
   },
   findAll: function (req, res) {
     db.Book

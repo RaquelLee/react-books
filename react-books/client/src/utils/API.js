@@ -6,11 +6,10 @@ export default {
     console.log(title)
     return axios.get("/api/books/googleBooks/" + title)
   },
-  // getOneGoogleBook: function(id) {
-  //   return axios.get(
-  //     "https://www.googleapis.com/books/v1/volumes?q=id:" + id + "&printType=books&key=" + key + 
-  //     "&fields=items(selfLink,id,volumeInfo(title,authors,description,imageLinks(thumbnail)))");
-  // },
+  getOneGoogleBook: function (id) {
+    console.log(id)
+    return axios.get("/api/books/googleBooks/" + id)
+  },
   getBooks: function () {
     return axios.get("/api/books");
   },
