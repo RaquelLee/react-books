@@ -18,9 +18,12 @@ function Search() {
   function handleBookSearch(e) {
     e.preventDefault();
     if (bookTitle) {
+      console.log(bookTitle.title)
       API.getGoogleBooks(
         bookTitle.title)
-        .then(res => setBooks(res.data))
+        .then(res =>
+          setBooks([...books, res.data])
+          ).then(console.log(books))
         .catch(err => console.log(err));
     }
   };
