@@ -8,7 +8,7 @@ import { Input, FormBtn } from "../components/Form";
 function Search() {
   const [books, setBooks] = useState([])
   const [bookTitle, setBookTitle] = useState('')
-  const [savedBook, setSavedBook] = useState({})
+  const [savedBook, setSavedBook] = useState('')
 
   function handleInputChange(e) {
     const { name, value } = e.target;
@@ -23,14 +23,15 @@ function Search() {
         bookTitle.title)
         .then(res =>
           setBooks(res.data.items)
-          ).then(console.log(books))
+        ).then(console.log(books))
         .catch(err => console.log(err));
     }
   };
 
   function setBookState(e) {
-    const { id, value } = e.target;
-    setSavedBook({...savedBook, [id]: value })
+    const  id = e.target.id;
+    console.log(id)
+    setSavedBook({...savedBook, id})
     console.log(savedBook)
       .then(API.getOneGoogleBook(savedBook.id)
         .then(res => setSavedBook(res.data))
@@ -73,24 +74,24 @@ function Search() {
               {books.map(book => (
                 <ListItem key={book.id}>
                   {book.id ? (
- <Link to={book.selfLink}>
- <strong>
-   View {book.volumeInfo.title} by
-   {book.volumeInfo.authors}
- </strong>
-</Link>
+                    <Link to={book.selfLink}>
+                      <strong>
+                        View {book.volumeInfo.title} by
+                        {book.volumeInfo.authors}
+                      </strong>
+                    </Link>
                   ) : <p>no link</p>}
-                 {book.volumeInfo.imageLinks.thumbnail ? (
- <img src={book.volumeInfo.imageLinks.thumbnail}
- alt={book.volumeInfo.title}></img>
+                  {book.volumeInfo.imageLinks.thumbnail ? (
+                    <img src={book.volumeInfo.imageLinks.thumbnail}
+                      alt={book.volumeInfo.title}></img>
                   ) : <p>no image</p>}
-                   {book.id ? (
- <button
- id={book.id}
- onClick={setBookState}
-/>
+                  {book.id ? (
+                    <button
+                      id={book.id}
+                      onClick={setBookState}
+                    />
                   ) : <p>no id</p>}
-                  
+
                 </ListItem>
               ))}
             </List>
