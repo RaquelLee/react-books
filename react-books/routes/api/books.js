@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const booksController = require("../../controllers/booksController");
 
-router.route("/googleBooks")
+router.route("/googleBooks/:bookTitle")
   .get(booksController.getGoogleBooks)
 
 // Matches with "/api/books"
