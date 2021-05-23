@@ -8,7 +8,7 @@ import { Input, FormBtn } from "../components/Form";
 function Search() {
   const [books, setBooks] = useState([])
   const [bookTitle, setBookTitle] = useState('')
-  const [savedBook, setSavedBook] = useState('')
+  const [savedBook, setSavedBook] = useState({})
 
   function handleInputChange(e) {
     const { name, value } = e.target;
@@ -29,20 +29,22 @@ function Search() {
   };
 
   function setBookState(e) {
+    console.log(books);
     const  id = e.target.id;
     console.log(id)
-    setSavedBook({...savedBook, id})
-    console.log(savedBook)
-      .then(API.getOneGoogleBook(savedBook.id)
-        .then(res => setSavedBook(res.data))
+      API.getOneGoogleBook(id)
+        .then(res => {
+          console.log(res.data)
+          setSavedBook(res.data[0])
+        }
+        )
         .then(handleSave())
-      )
   };
 
   function handleSave() {
     API.saveBook({
       title: savedBook.title,
-      authors: [savedBook.authors],
+      authors: savedBook.authors,
       description: savedBook.description,
       image: savedBook.image,
       link: savedBook.link
