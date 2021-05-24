@@ -35,21 +35,24 @@ function Search() {
     API.getOneGoogleBook(id)
       .then(res => {
         console.log(res.data.items[0])
-        setSavedBook(savedBook, {
-          selfLink: res.data.items[0].selfLink
+        setSavedBook({
+          link: res.data.items[0].selfLink,
+          authors: res.data.items[0].volumeInfo.authors,
+          description: res.data.items[0].volumeInfo.description,
+          image: res.data.items[0].volumeInfo.imageLinks.thumbnail,
+          title: res.data.items[0].title
         })
-        console.log(savedBook)
       }).then(handleSave())
   };
 
   function handleSave() {
     console.log(savedBook)
     API.saveBook({
-      title: savedBook.title,
       authors: savedBook.authors,
       description: savedBook.description,
       image: savedBook.image,
-      link: savedBook.link
+      link: savedBook.link,
+      title: savedBook.title,
     }).then(res => console.log(res))
       .catch(err => console.log(err));
   };

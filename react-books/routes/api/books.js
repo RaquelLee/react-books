@@ -10,7 +10,7 @@ router.route("/googleBooks/:bookTitle")
 // Matches with "/api/books"
 router.route("/")
   .get(booksController.findAll)
-// .post(booksController.create);
+.post(booksController.create);
 
 // Matches with "/api/books/:id"
 router

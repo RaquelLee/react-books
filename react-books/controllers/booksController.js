@@ -20,7 +20,7 @@ module.exports = {
   },
   getOneGoogleBook: function (req, res) {
     console.log("req: ", req)
-    console.log("req.params.bookTitle: ", req.params.bookID)
+    console.log("req.params.bookid: ", req.params.bookID)
     fetch("https://www.googleapis.com/books/v1/volumes?q=id:"
     + req.params.bookID + "&printType=books&key=" + apikey +
     "&fields=items(selfLink,id,volumeInfo(title,authors,description,imageLinks(thumbnail)))")
@@ -39,9 +39,9 @@ module.exports = {
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
-  findById: function (req, res) {
+  create: function(req, res) {
     db.Book
-      .findById(req.params.id)
+      .create(req.body)
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
