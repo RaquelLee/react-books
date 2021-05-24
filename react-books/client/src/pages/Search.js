@@ -34,14 +34,14 @@ function Search() {
     console.log(id)
       API.getOneGoogleBook(id)
         .then(res => {
-          console.log(res.data)
-          setSavedBook(res.data[0])
-        }
-        )
-        .then(handleSave())
+          console.log(res.data.items[0])
+          setSavedBook(res.data.items[0])
+          console.log(savedBook)
+        }).then(handleSave())
   };
 
   function handleSave() {
+    console.log(savedBook)
     API.saveBook({
       title: savedBook.title,
       authors: savedBook.authors,
