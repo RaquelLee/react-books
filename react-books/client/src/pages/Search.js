@@ -35,7 +35,9 @@ function Search() {
       API.getOneGoogleBook(id)
         .then(res => {
           console.log(res.data.items[0])
-          setSavedBook(res.data.items[0])
+          setSavedBook(savedBook,{
+             selfLink: res.data.items[0].selfLink
+          })
           console.log(savedBook)
         }).then(handleSave())
   };
