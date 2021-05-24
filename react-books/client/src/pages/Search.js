@@ -30,16 +30,16 @@ function Search() {
 
   function setBookState(e) {
     console.log(books);
-    const  id = e.target.id;
+    const id = e.target.id;
     console.log(id)
-      API.getOneGoogleBook(id)
-        .then(res => {
-          console.log(res.data.items[0])
-          setSavedBook(savedBook,{
-             selfLink: res.data.items[0].selfLink
-          })
-          console.log(savedBook)
-        }).then(handleSave())
+    API.getOneGoogleBook(id)
+      .then(res => {
+        console.log(res.data.items[0])
+        setSavedBook(savedBook, {
+          selfLink: res.data.items[0].selfLink
+        })
+        console.log(savedBook)
+      }).then(handleSave())
   };
 
   function handleSave() {
