@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { Col, Row, Container } from "../components/Grid";
 import { List, ListItem } from "../components/List";
 import { Input, FormBtn } from "../components/Form";
+import SaveBtn from "../components/SaveBtn";
 
 function Search() {
   const [books, setBooks] = useState([])
@@ -75,7 +76,7 @@ function Search() {
                       alt={book.volumeInfo.title}></img>
                   ) : <p>no image</p>}
                   {book.id ? (
-                    <button
+                    <SaveBtn
                       id={book.id}
                       onClick={setBookState}
                     />

@@ -3,6 +3,8 @@ import API from "../utils/API";
 import { Link } from "react-router-dom";
 import { Col, Row, Container } from "../components/Grid";
 import { List, ListItem } from "../components/List";
+import DeleteBtn from "../components/DeleteBtn";
+
 // gets books from db
 function Books() {
   // Setting our component's initial state
@@ -45,7 +47,7 @@ function Books() {
                   </Link>
                   <img src={book.image}
                     alt={book.title}></img>
-                  <button
+                  <DeleteBtn
                   id={book._id}
                   onClick={deleteBook}
                   />
