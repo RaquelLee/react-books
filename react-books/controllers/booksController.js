@@ -5,8 +5,6 @@ const apikey = process.env.API_KEY;
 // Defining methods for the booksController
 module.exports = {
   getGoogleBooks: function (req, res) {
-      console.log("req: ", req)
-      console.log("req.params.bookTitle: ", req.params.bookTitle)
       fetch("https://www.googleapis.com/books/v1/volumes?q=title:"
       + req.params.bookTitle + "&printType=books&key=" + apikey +
       "&fields=items(selfLink,id,volumeInfo(title,authors,description,imageLinks(thumbnail)))")
@@ -19,8 +17,6 @@ module.exports = {
       });
   },
   getOneGoogleBook: function (req, res) {
-    console.log("req: ", req)
-    console.log("req.params.bookid: ", req.params.bookID)
     fetch("https://www.googleapis.com/books/v1/volumes?q=id:"
     + req.params.bookID + "&printType=books&key=" + apikey +
     "&fields=items(selfLink,id,volumeInfo(title,authors,description,imageLinks(thumbnail)))")

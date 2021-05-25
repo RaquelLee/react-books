@@ -20,6 +20,13 @@ function Books() {
       ).catch(err => console.log(err));
   };
 
+  function deleteBook(e) {
+    const id = e.target.id;
+    API.deleteBook(id)
+      .then(res => loadBooks())
+      .catch(err => console.log(err));
+  }
+
   return (
     <Container fluid>
       <Row>
@@ -31,14 +38,15 @@ function Books() {
                 <ListItem key={book.id}>
                   <Link to={book.link}>
                     <strong>
-                      View {book.title} by 
+                      View {book.title} by
                       {book.authors}
                     </strong>
                   </Link>
-                  <img src={book.image} 
-                  alt={book.title}></img>
+                  <img src={book.image}
+                    alt={book.title}></img>
                   <button
-                    Delete
+                  id={book.id}
+                  onClick={deleteBook}
                   />
                 </ListItem>
               ))}
