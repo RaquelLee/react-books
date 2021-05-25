@@ -8,7 +8,6 @@ import { Input, FormBtn } from "../components/Form";
 function Search() {
   const [books, setBooks] = useState([])
   const [bookTitle, setBookTitle] = useState('')
-  const [savedBook, setSavedBook] = useState({})
 
   function handleInputChange(e) {
     const { name, value } = e.target;
@@ -18,23 +17,18 @@ function Search() {
   function handleBookSearch(e) {
     e.preventDefault();
     if (bookTitle) {
-      console.log(bookTitle.title)
       API.getGoogleBooks(
         bookTitle.title)
         .then(res =>
           setBooks(res.data.items)
-        ).then(console.log(books))
-        .catch(err => console.log(err));
+        ).catch(err => console.log(err));
     }
   };
 
   function setBookState(e) {
-    console.log(books);
     const id = e.target.id;
-    console.log(id)
     API.getOneGoogleBook(id)
       .then(res => {
-        console.log(res.data.items[0])
         API.saveBook({
           link: res.data.items[0].selfLink,
           authors: res.data.items[0].volumeInfo.authors,
@@ -68,7 +62,7 @@ function Search() {
             <List>
               {books.map(book => (
                 <ListItem key={book.id}>
-                  {book.id ? (
+                  {book.selfLink ? (
                     <Link to={book.selfLink}>
                       <strong>
                         View {book.volumeInfo.title} by
@@ -86,7 +80,6 @@ function Search() {
                       onClick={setBookState}
                     />
                   ) : <p>no id</p>}
-
                 </ListItem>
               ))}
             </List>
