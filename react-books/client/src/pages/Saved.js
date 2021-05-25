@@ -19,8 +19,8 @@ function Books() {
   function loadBooks() {
     API.getBooks()
       .then(res => setBooks(res.data),
-      console.log(books)
-            ).catch(err => console.log(err));
+        console.log(books)
+      ).catch(err => console.log(err));
   };
 
   function deleteBook(e) {
@@ -40,17 +40,21 @@ function Books() {
               {books.map(book => (
                 <ListItem key={book._id}>
                   <Link to={book.link}>
-                    <strong>
-                      View {book.title} by
+                    View {book.title} by
                       {book.authors}
-                    </strong>
                   </Link>
+
                   <img src={book.image}
                     alt={book.title}></img>
                   <DeleteBtn
-                  id={book._id}
-                  onClick={deleteBook}
+                    id={book._id}
+                    onClick={deleteBook}
                   />
+                  {book.description ? (
+                    <p>
+                      {book.description}
+                    </p>
+                  ) : <p>no description</p>}
                 </ListItem>
               ))}
             </List>

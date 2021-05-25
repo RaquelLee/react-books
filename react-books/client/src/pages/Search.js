@@ -65,16 +65,21 @@ function Search() {
                 <ListItem key={book.id}>
                   {book.selfLink ? (
                     <Link to={book.selfLink}>
-                      <strong>
-                        View {book.volumeInfo.title} by
-                        {book.volumeInfo.authors}
-                      </strong>
+
+                      View {book.volumeInfo.title} by
+                      {book.volumeInfo.authors}
                     </Link>
                   ) : <p>no link</p>}
+
                   {book.volumeInfo.imageLinks.thumbnail ? (
                     <img src={book.volumeInfo.imageLinks.thumbnail}
                       alt={book.volumeInfo.title}></img>
                   ) : <p>no image</p>}
+                  {book.volumeInfo.description ? (
+                    <p>
+                      {book.volumeInfo.description}
+                    </p>
+                  ) : <p>no description</p>}
                   {book.id ? (
                     <SaveBtn
                       id={book.id}
