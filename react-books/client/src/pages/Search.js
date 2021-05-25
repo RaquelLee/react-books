@@ -40,7 +40,7 @@ function Search() {
           authors: res.data.items[0].volumeInfo.authors,
           description: res.data.items[0].volumeInfo.description,
           image: res.data.items[0].volumeInfo.imageLinks.thumbnail,
-          title: res.data.items[0].title
+          title: res.data.items[0].volumeInfo.title
         })
       }).then(handleSave())
   };
