@@ -16,8 +16,9 @@ function Books() {
   // Loads all books and sets them to books
   function loadBooks() {
     API.getBooks()
-      .then(res => setBooks(res.data)
-      ).catch(err => console.log(err));
+      .then(res => setBooks(res.data),
+      console.log(books)
+            ).catch(err => console.log(err));
   };
 
   function deleteBook(e) {
@@ -35,7 +36,7 @@ function Books() {
           {books.length ? (
             <List>
               {books.map(book => (
-                <ListItem key={book.id}>
+                <ListItem key={book._id}>
                   <Link to={book.link}>
                     <strong>
                       View {book.title} by
@@ -45,7 +46,7 @@ function Books() {
                   <img src={book.image}
                     alt={book.title}></img>
                   <button
-                  id={book.id}
+                  id={book._id}
                   onClick={deleteBook}
                   />
                 </ListItem>
